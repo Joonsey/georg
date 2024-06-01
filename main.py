@@ -1,3 +1,4 @@
+#!/bin/python3
 import dataclasses
 import datetime
 import smtplib
@@ -45,7 +46,6 @@ stocks_we_care_about = {
 }
 
 def ensure_state():
-
     if not all([smtp_password, smtp_username]):
         raise ValueError("missing environment variables for SMPT_USERNAME or SMPT_PASSWORD.")
 
@@ -71,11 +71,12 @@ def add_id_to_cache(message_id: int):
 
 
 def send_email(email: str, title: str, content: str) -> None:
+    assert smtp_username and smtp_password
     with smtplib.SMTP(smtp_server, smtp_port) as server:
         server.starttls()
         server.login(smtp_username, smtp_password)
 
-        message = 'Subject: {}\n\n{}'.format(title, content.encode()) # We have to encode because ascii is incompatible with smtplib
+        message = f'Subject: {title}\n\n{content}'.encode() # We have to encode because ascii is incompatible with smtplib
         server.sendmail(smtp_username, email, message)
 
 def get_message_content(message_id: int) -> tuple[str, str]:
