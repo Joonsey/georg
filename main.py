@@ -4,6 +4,7 @@ import datetime
 import smtplib
 import os
 
+from typing import Optional
 from pathlib import Path
 
 import httpx
@@ -19,18 +20,18 @@ class Message:
     markets: list[str]
     issuerId: int
     publishedTime: str
-    correctionForMessageId: int | None = None
-    correctedByMessageId: int | None = None
-    issuerSign: str | None = None
-    issuerName: str | None = None
-    instrId: int | None = None
-    instrumentName: str | None = None
-    instrumentFullName: str | None = None
-    test: bool | None = None
-    numbAttachments: int | None = None
-    clientAnnouncementId: str | None = None
-    infoRequired: int | None = None
-    oamMandatory: int | None = None
+    correctionForMessageId: Optional[int] = None
+    correctedByMessageId: Optional[int] = None
+    issuerSign: Optional[str] = None
+    issuerName: Optional[str] = None
+    instrId: Optional[int] = None
+    instrumentName: Optional[str] = None
+    instrumentFullName: Optional[str] = None
+    test: Optional[bool] = None
+    numbAttachments: Optional[int] = None
+    clientAnnouncementId: Optional[str] = None
+    infoRequired: Optional[int] = None
+    oamMandatory: Optional[int] = None
 
 smtp_server = 'smtp.gmail.com'
 smtp_port = 587
